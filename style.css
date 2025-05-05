@@ -1,0 +1,135 @@
+:root {
+    --header-height: 160px;
+    --header-height-min: 80px;
+    --accent-color: rgb(0, 0, 0);
+    --dark-color: #040404;
+    --light-color: #fff;
+    --primary-color: #111111;
+    --body-font: "Outfit", sans-serif;
+    --heading-font: "Urbanist", sans-serif;
+  }
+
+  .brand-image {
+    max-width: 100%;
+    height: auto;
+}
+
+#billboard {
+  position: relative; /* Menambahkan posisi relatif untuk kontrol lebih baik */
+  overflow: hidden;
+  padding: 10px 0; /* Menyembunyikan bagian gambar yang melampaui batas */
+  margin-top: 4rem;
+}
+
+#billboard img {
+  width: 100%; /* Mengatur lebar gambar menjadi 100% dari elemen induk */
+  height: auto; /* Memastikan tinggi gambar otomatis berdasarkan lebar */
+  display: block;
+  margin: 0; /* Menghilangkan jarak di bawah gambar */
+}
+@media (max-width: 768px) {
+  #billboard img {
+      width: 100%; /* Gambar akan menyesuaikan lebar 100% pada perangkat kecil */
+      height: auto; /* Memastikan tinggi gambar otomatis */
+    
+  }
+
+  #billboard {
+      padding: 10px 0;
+  }
+}
+  
+  body {
+    font-family: var(--dark-color);
+    font-size: 19px;
+    color: var(--dark-color);
+    margin: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--dark-color);
+    color: black;
+  }
+  
+  h1 {
+    font-size: 3.5em;
+  }
+  
+  h2 {
+    font-size: 2.0em;
+  }
+  
+  h3 {
+    font-size: 1.6em;
+    color: #040404;
+  }
+  
+  p {
+    font-family: var;
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+  }
+  
+  a {
+    color: var;
+    text-decoration: none;
+    transition: 0.3s color ease-out;
+  }
+  
+  a:hover {
+    color: var;
+  }
+  
+  .container {
+    max-width: 1400px;
+  }
+
+  .product-item img {
+    width: 300spx;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .btn {
+    background-color: var;
+    color: var;
+    padding: 0.75em 1.5em;
+    border: 2px solid transparent;
+    border-radius: 0px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .btn-light {
+    background-color: var;
+    color: var;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .py-5 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .bg-light {
+    background-color: #f8f9fa;
+  }
+  
+  .bg-dark {
+    background-color: var;
+  }
+  
+  .footer {
+    padding: 2rem 0;
+    background-color: var;
+    color: var;
+  }
+  
+  .footer a {
+    color: var;
+  }
+  
