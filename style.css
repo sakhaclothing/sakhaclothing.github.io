@@ -288,3 +288,26 @@ a:hover {
 .newsletter__button:hover {
   background-color: #777;
 }
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 50px 0;
+}
+.footer__container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 20px;
+}
+.footer__section {
+  display: flex;
+  flex-direction: column;
+}
+.footer__title {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
