@@ -223,3 +223,68 @@ a:hover {
 .button:hover {
   background-color: #333;
 }
+
+.newsletter.section {
+  background-color: #000;
+  color: #fff;
+  padding: 50px 0;
+}
+.newsletter__container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 20px;
+}
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.image-section img {
+  width: 100%;
+  height: auto;
+}
+.text-section {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section__title {
+  font-size: 2.5em;
+  margin: 0 0 20px 0;
+}
+.newsletter__description {
+  font-size: 1.2em;
+  margin: 0 0 30px 0;
+}
+.newsletter__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.newsletter__input {
+  padding: 10px;
+  font-size: 1em;
+  background-color: #333;
+  border: none;
+  color: #fff;
+}
+.newsletter__input::placeholder {
+  color: #ccc;
+}
+.newsletter__button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.newsletter__button:hover {
+  background-color: #777;
+}
