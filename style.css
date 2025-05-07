@@ -394,3 +394,19 @@ a:hover {
   color: #7f8c8d;
   margin: 5px 0;
 }
+.product-card .rating {
+  color: #f1c40f;
+  margin: 10px 0;
+}
+.product-card .shop-now {
+  background-color: #2c3e50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.product-card .shop-now:hover {
+  background-color: #34495e;
+}
