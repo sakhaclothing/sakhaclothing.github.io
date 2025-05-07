@@ -190,8 +190,9 @@ a:hover {
 
 /* Image section styling */
 .image-section img {
-  width: 50%;
-  height: auto;
+  width: 300px; /* Set desired width (adjust as needed) */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Ensure image doesn't exceed container */
   border-radius: 10px;
   object-fit: cover;
 }
