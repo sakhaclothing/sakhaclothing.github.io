@@ -357,3 +357,22 @@ a:hover {
   color: #7f8c8d;
   margin-bottom: 30px;
 }
+.products-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.product-card {
+  background-color: #ffe6e6;
+  border-radius: 10px;
+  width: 200px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
