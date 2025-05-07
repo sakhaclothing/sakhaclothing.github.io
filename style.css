@@ -190,8 +190,8 @@ a:hover {
 
 /* Image section styling */
 .image-section img {
-  width: 60%;           /* Lebih kecil dari 70% */
-  max-width: 300px;     /* Ukuran maksimum */
+  width: 70%; /* Lebih kecil dari 70% */
+  max-width: 300px; /* Ukuran maksimum */
   height: auto;
   border-radius: 10px;
   object-fit: cover;
