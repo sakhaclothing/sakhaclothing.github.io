@@ -5,17 +5,17 @@ const AuthService = {
 
     // Get token from localStorage
     getToken: function () {
-        return localStorage.getItem('authToken');
+        return localStorage.getItem('token');
     },
 
     // Set token to localStorage
     setToken: function (token) {
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('token', token);
     },
 
     // Remove token from localStorage
     removeToken: function () {
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('token');
     },
 
     // Check if user is authenticated
