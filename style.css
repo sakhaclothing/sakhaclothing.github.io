@@ -423,3 +423,160 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Profile Section Styles */
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 8px 15px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-container:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-dropdown-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.3s ease;
+}
+
+.profile-dropdown-btn:hover {
+  color: #333;
+}
+
+.profile-dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.profile-dropdown-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+/* Dark theme for navbar */
+.navbar.bg-black .profile-container {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar.bg-black .profile-name {
+  color: #fff;
+}
+
+.navbar.bg-black .profile-dropdown-btn {
+  color: #ccc;
+}
+
+.navbar.bg-black .profile-dropdown-btn:hover {
+  color: #fff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-section {
+    margin-left: 0;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .profile-container {
+    padding: 6px 12px;
+  }
+  
+  .profile-photo {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+  }
+  
+  .profile-name {
+    font-size: 13px;
+  }
+}
+
+
