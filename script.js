@@ -134,8 +134,7 @@ const AuthService = {
     "use strict";
 
     $(document).ready(function () {
-
-        // Profile functionality
+        // Inisialisasi elemen-elemen
         var profileSection = $('#profileSection');
         var profileDropdownBtn = $('#profileDropdownBtn');
         var profileDropdownContent = $('#profileDropdownContent');
@@ -145,10 +144,9 @@ const AuthService = {
         // Ambil elemen loginNav
         const loginNav = $('#loginNav');
 
-        // Check if user is logged in using AuthService
+        // Cek status login user
         async function checkLoginStatus() {
             try {
-                // First check if we have a token
                 const token = AuthService.getToken();
                 console.log('[DEBUG] Token:', token);
                 if (!AuthService.isAuthenticated()) {
@@ -157,11 +155,10 @@ const AuthService = {
                     return;
                 }
 
-                // Langsung ambil profile dari backend
+                // Ambil profile user dari backend
                 const userData = await AuthService.getUserProfile();
                 console.log('[DEBUG] Data user dari backend:', userData);
                 if (userData) {
-                    // Store user data locally for faster access
                     localStorage.setItem('userData', JSON.stringify(userData));
                     showProfile(userData);
                 } else {
@@ -179,6 +176,7 @@ const AuthService = {
         }
 
         function showProfile(userData) {
+            console.log('showProfile dipanggil, loginNav:', loginNav.length, userData);
             profileSection.show();
             profileName.text(userData.username || 'User Name');
             if (userData.photo) {
@@ -194,28 +192,30 @@ const AuthService = {
             loginNav.show();
         }
 
-        // Make functions globally available
-        window.updateProfileDisplay = showProfile;
-        window.hideProfileDisplay = hideProfile;
-
-        // Add method to AuthService for checking and updating profile
-        AuthService.checkAndUpdateProfile = function () {
-            checkLoginStatus();
-        };
-
+        // Logout function
         async function logout() {
             try {
                 await AuthService.logout();
                 hideProfile();
-                // Redirect to login page
                 window.location.href = 'https://sakhaclothing.shop/login';
             } catch (error) {
                 console.error('Error during logout:', error);
-                // Even if logout fails, hide profile locally
                 hideProfile();
                 window.location.href = 'https://sakhaclothing.shop/login';
             }
         }
+
+        // Event handler untuk logout
+        logoutBtn.on('click', function (e) {
+            e.preventDefault();
+            logout();
+        });
+
+        // Inisialisasi status profile saat page load
+        checkLoginStatus();
+
+        // Handle login redirect (jika login via redirect)
+        AuthService.handleLoginRedirect();
 
         // Profile dropdown functionality
         profileDropdownBtn.on('click', function (e) {
@@ -230,14 +230,6 @@ const AuthService = {
             }
         });
 
-        // Logout functionality
-        logoutBtn.on('click', function (e) {
-            e.preventDefault();
-            logout();
-        });
-
-        // These functions are now defined globally above
-
         var initScrollNav = function () {
             var scroll = $(window).scrollTop();
             if (scroll >= 200) {
@@ -250,7 +242,6 @@ const AuthService = {
         $(window).scroll(function () {
             initScrollNav();
         });
-
 
         var productSwiper = new Swiper(".product-swiper", {
             slidesPerView: 3,
@@ -276,11 +267,5 @@ const AuthService = {
                 prevEl: ".swiper-button-prev",
             },
         });
-
-        // Initialize profile status on page load
-        checkLoginStatus();
-
-        // Handle login redirect on page load
-        AuthService.handleLoginRedirect();
     });
 })(jQuery);
