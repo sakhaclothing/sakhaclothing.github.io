@@ -1,7 +1,7 @@
 // Authentication Service
 const AuthService = {
     // Backend API URL - sesuaikan dengan URL backend Anda
-    API_BASE_URL: 'https://sakhaclothing.shop/api',
+    API_BASE_URL: 'https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha',
 
     // Get token from localStorage
     getToken: function () {
@@ -60,8 +60,8 @@ const AuthService = {
                 return null;
             }
 
-            const response = await fetch(`${this.API_BASE_URL}/user/profile`, {
-                method: 'GET',
+            const response = await fetch(`${this.API_BASE_URL}/auth/profile`, {
+                method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
