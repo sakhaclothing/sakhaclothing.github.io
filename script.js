@@ -197,11 +197,11 @@ const AuthService = {
             try {
                 await AuthService.logout();
                 hideProfile();
-                window.location.href = 'https://sakhaclothing.shop/login';
+                window.location.href = 'https://sakhaclothing.shop';
             } catch (error) {
                 console.error('Error during logout:', error);
                 hideProfile();
-                window.location.href = 'https://sakhaclothing.shop/login';
+                window.location.href = 'https://sakhaclothing.shop';
             }
         }
 
