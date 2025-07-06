@@ -155,19 +155,7 @@ const AuthService = {
                     return;
                 }
 
-                // Validate token with backend
-                const isValid = await AuthService.validateToken();
-                console.log('[DEBUG] Hasil validasi token:', isValid);
-                if (!isValid) {
-                    // Token is invalid, clear everything
-                    console.log('[DEBUG] Token tidak valid, hapus token dan sembunyikan profile');
-                    AuthService.removeToken();
-                    localStorage.removeItem('userData');
-                    hideProfile();
-                    return;
-                }
-
-                // Get user profile from backend
+                // Langsung ambil profile dari backend
                 const userData = await AuthService.getUserProfile();
                 console.log('[DEBUG] Data user dari backend:', userData);
                 if (userData) {
@@ -175,11 +163,15 @@ const AuthService = {
                     localStorage.setItem('userData', JSON.stringify(userData));
                     showProfile(userData);
                 } else {
-                    console.log('[DEBUG] Tidak dapat data user, sembunyikan profile');
+                    console.log('[DEBUG] Tidak dapat data user, hapus token dan sembunyikan profile');
+                    AuthService.removeToken();
+                    localStorage.removeItem('userData');
                     hideProfile();
                 }
             } catch (error) {
                 console.error('[DEBUG] Error checking login status:', error);
+                AuthService.removeToken();
+                localStorage.removeItem('userData');
                 hideProfile();
             }
         }
