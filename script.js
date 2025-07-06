@@ -178,7 +178,7 @@ const AuthService = {
 
         function showProfile(userData) {
             profileSection.show();
-            profileName.text(userData.name || 'User Name');
+            profileName.text(userData.username || 'User Name');
             if (userData.photo) {
                 profilePhoto.attr('src', userData.photo);
             }
