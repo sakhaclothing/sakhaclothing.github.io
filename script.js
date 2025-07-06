@@ -142,6 +142,8 @@ const AuthService = {
         var logoutBtn = $('#logoutBtn');
         var profileName = $('#profileName');
         var profilePhoto = $('#profilePhoto');
+        // Ambil elemen loginNav
+        const loginNav = $('#loginNav');
 
         // Check if user is logged in using AuthService
         async function checkLoginStatus() {
@@ -182,10 +184,14 @@ const AuthService = {
             if (userData.photo) {
                 profilePhoto.attr('src', userData.photo);
             }
+            // Sembunyikan menu login
+            loginNav.hide();
         }
 
         function hideProfile() {
             profileSection.hide();
+            // Tampilkan menu login
+            loginNav.show();
         }
 
         // Make functions globally available
