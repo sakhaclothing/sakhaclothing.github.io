@@ -147,15 +147,20 @@ const AuthService = {
         async function checkLoginStatus() {
             try {
                 // First check if we have a token
+                const token = AuthService.getToken();
+                console.log('[DEBUG] Token:', token);
                 if (!AuthService.isAuthenticated()) {
+                    console.log('[DEBUG] Tidak ada token, sembunyikan profile');
                     hideProfile();
                     return;
                 }
 
                 // Validate token with backend
                 const isValid = await AuthService.validateToken();
+                console.log('[DEBUG] Hasil validasi token:', isValid);
                 if (!isValid) {
                     // Token is invalid, clear everything
+                    console.log('[DEBUG] Token tidak valid, hapus token dan sembunyikan profile');
                     AuthService.removeToken();
                     localStorage.removeItem('userData');
                     hideProfile();
@@ -164,15 +169,17 @@ const AuthService = {
 
                 // Get user profile from backend
                 const userData = await AuthService.getUserProfile();
+                console.log('[DEBUG] Data user dari backend:', userData);
                 if (userData) {
                     // Store user data locally for faster access
                     localStorage.setItem('userData', JSON.stringify(userData));
                     showProfile(userData);
                 } else {
+                    console.log('[DEBUG] Tidak dapat data user, sembunyikan profile');
                     hideProfile();
                 }
             } catch (error) {
-                console.error('Error checking login status:', error);
+                console.error('[DEBUG] Error checking login status:', error);
                 hideProfile();
             }
         }
