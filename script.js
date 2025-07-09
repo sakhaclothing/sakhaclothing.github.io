@@ -143,6 +143,8 @@ const AuthService = {
         var profilePhoto = $('#profilePhoto');
         // Ambil elemen loginNav
         const loginNav = $('#loginNav');
+        var dashboardNav = $('#dashboardNav');
+        var registerNav = $('#registerNav');
 
         // Cek status login user
         async function checkLoginStatus() {
@@ -176,20 +178,25 @@ const AuthService = {
         }
 
         function showProfile(userData) {
-            console.log('showProfile dipanggil, loginNav:', loginNav.length, userData);
             profileSection.show();
             profileName.text(userData.username || 'User Name');
             if (userData.photo) {
                 profilePhoto.attr('src', userData.photo);
             }
-            // Sembunyikan menu login
             loginNav.hide();
+            registerNav.hide();
+            if (userData.role === 'admin') {
+                dashboardNav.show();
+            } else {
+                dashboardNav.hide();
+            }
         }
 
         function hideProfile() {
             profileSection.hide();
-            // Tampilkan menu login
             loginNav.show();
+            registerNav.show();
+            dashboardNav.hide();
         }
 
         // Logout function
@@ -198,8 +205,7 @@ const AuthService = {
                 await AuthService.logout();
                 hideProfile();
                 window.location.href = 'https://sakhaclothing.shop';
-            } catch (error) {
-                console.error('Error during logout:', error);
+            } catch (e) {
                 hideProfile();
                 window.location.href = 'https://sakhaclothing.shop';
             }
