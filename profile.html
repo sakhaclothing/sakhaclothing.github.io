@@ -201,7 +201,7 @@
       const notif = document.getElementById('otpNotif');
       notif.textContent = '';
       try {
-        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/user/verify-email', {
+        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/auth/verify-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -241,7 +241,7 @@
         return;
       }
       try {
-        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/user/password', {
+        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/auth/change-password', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
