@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Sakha Clothing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" style="max-width:400px;margin:40px auto;padding:2rem;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+    <h2 style="text-align:center;margin-bottom:2rem;">Ganti Password</h2>
+    <form id="changePasswordForm">
+      <div class="form-group">
+        <label for="oldPassword">Password Lama</label>
+        <input type="password" id="oldPassword" name="oldPassword" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="newPassword">Password Baru</label>
+        <input type="password" id="newPassword" name="newPassword" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="confirmNewPassword">Konfirmasi Password Baru</label>
+        <input type="password" id="confirmNewPassword" name="confirmNewPassword" required class="form-control">
+      </div>
+      <button type="submit" class="btn" style="width:100%;margin-top:1rem;background:#000;color:#fff;padding:0.75rem 0;border:none;border-radius:4px;">Simpan Password</button>
+    </form>
+    <div id="notif" style="margin-top:1rem;text-align:center;"></div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const oldPassword = document.getElementById('oldPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+      const notif = document.getElementById('notif');
+      notif.textContent = '';
+      // Ambil token dari localStorage/sessionStorage
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (!token) {
+        notif.textContent = 'Anda harus login.';
+        notif.style.color = 'red';
+        return;
+      }
+      try {
+        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/user/password', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            old_password: oldPassword,
+            new_password: newPassword,
+            confirm_new_password: confirmNewPassword
+          })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          notif.textContent = data.message || 'Password berhasil diganti!';
+          notif.style.color = 'green';
+          document.getElementById('changePasswordForm').reset();
+        } else {
+          notif.textContent = data.error || 'Gagal mengganti password.';
+          notif.style.color = 'red';
+        }
+      } catch (err) {
+        notif.textContent = 'Terjadi kesalahan. Coba lagi.';
+        notif.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html> 
