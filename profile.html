@@ -5,16 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - Sakha Clothing</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../login/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
+    body {
+      background-image: url('Beige Aesthetic Personal Brand Website Blog Banner.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
     .profile-card {
       max-width: 420px;
       margin: 48px auto;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.15);
       padding: 2.5rem 2rem 2rem 2rem;
       text-align: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
     .profile-avatar {
       width: 80px;
@@ -23,10 +36,12 @@
       object-fit: cover;
       margin-bottom: 1rem;
       border: 3px solid #eee;
+      background: #fff;
     }
     .profile-form .form-group {
       margin-bottom: 1.2rem;
       text-align: left;
+      position: relative;
     }
     .profile-form label {
       font-weight: 500;
@@ -36,12 +51,20 @@
     }
     .profile-form input {
       width: 100%;
-      padding: 0.6rem 0.8rem;
+      padding: 0.6rem 2.5rem 0.6rem 2.5rem;
       border: 1px solid #ddd;
       border-radius: 6px;
       font-size: 1rem;
       background: #fafbfc;
       margin-top: 0.2rem;
+    }
+    .profile-form .input-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-color, #000);
+      font-size: 1.1rem;
     }
     .profile-form .btn {
       width: 100%;
@@ -73,59 +96,61 @@
       border-radius: 8px;
       text-align: left;
     }
-    .notif {
-      margin-top: 1rem;
-      text-align: center;
-      font-weight: 500;
+    @media (max-width: 600px) {
+      .profile-card { padding: 1.2rem 0.5rem; }
     }
   </style>
 </head>
-<body style="background:#f8f9fa;">
-  <div class="profile-card">
+<body>
+  <div class="profile-card login-card">
     <img src="images/logo baruu.png" alt="Profile Photo" class="profile-avatar">
     <h2 style="margin-bottom:0.5rem;" id="profileName">Profil Saya</h2>
     <form id="profileForm" class="profile-form">
       <div class="section-title"><i class="fas fa-user-edit"></i> Edit Informasi</div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-user"></i></span>
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" required class="input-field">
       </div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-id-card"></i></span>
         <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" name="fullname" required>
+        <input type="text" id="fullname" name="fullname" required class="input-field">
       </div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-envelope"></i></span>
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required class="input-field">
       </div>
       <button type="submit" class="btn">Simpan Perubahan</button>
-      <div id="profileNotif" class="notif"></div>
     </form>
     <form id="otpForm" class="profile-form" style="display:none;">
       <div class="section-title"><i class="fas fa-envelope"></i> Verifikasi Email Baru</div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-key"></i></span>
         <label for="otp">Kode OTP</label>
-        <input type="text" id="otp" name="otp" maxlength="6" required>
+        <input type="text" id="otp" name="otp" maxlength="6" required class="input-field">
       </div>
       <button type="submit" class="btn">Verifikasi Email</button>
-      <div id="otpNotif" class="notif"></div>
     </form>
     <form id="changePasswordForm" class="profile-form" style="margin-top:2rem;">
       <div class="section-title"><i class="fas fa-key"></i> Ganti Password</div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-lock"></i></span>
         <label for="oldPassword">Password Lama</label>
-        <input type="password" id="oldPassword" name="oldPassword" required>
+        <input type="password" id="oldPassword" name="oldPassword" required class="input-field">
       </div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-lock"></i></span>
         <label for="newPassword">Password Baru</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+        <input type="password" id="newPassword" name="newPassword" required class="input-field">
       </div>
       <div class="form-group">
+        <span class="input-icon"><i class="fa fa-lock"></i></span>
         <label for="confirmNewPassword">Konfirmasi Password Baru</label>
-        <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+        <input type="password" id="confirmNewPassword" name="confirmNewPassword" required class="input-field">
       </div>
       <button type="submit" class="btn">Simpan Password</button>
-      <div id="notif" class="notif"></div>
     </form>
   </div>
   <script src="script.js"></script>
@@ -159,8 +184,6 @@
       const username = document.getElementById('username').value.trim();
       const fullname = document.getElementById('fullname').value.trim();
       const email = document.getElementById('email').value.trim();
-      const notif = document.getElementById('profileNotif');
-      notif.textContent = '';
       // Cek apakah email berubah
       if (!lastEmail) lastEmail = email;
       const isEmailChanged = email !== lastEmail;
@@ -175,20 +198,19 @@
         });
         const data = await res.json();
         if (res.ok) {
-          notif.textContent = isEmailChanged ? 'Kode OTP dikirim ke email baru. Silakan verifikasi.' : 'Profil berhasil diperbarui!';
-          notif.style.color = 'green';
           if (isEmailChanged) {
+            Swal.fire({ icon: 'info', title: 'Verifikasi Email', text: 'Kode OTP dikirim ke email baru. Silakan verifikasi.' });
             document.getElementById('profileForm').style.display = 'none';
             document.getElementById('otpForm').style.display = '';
+          } else {
+            Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Profil berhasil diperbarui!' });
           }
           lastEmail = email;
         } else {
-          notif.textContent = data.error || 'Gagal update profil.';
-          notif.style.color = 'red';
+          Swal.fire({ icon: 'error', title: 'Gagal', text: data.error || 'Gagal update profil.' });
         }
       } catch {
-        notif.textContent = 'Terjadi kesalahan. Coba lagi.';
-        notif.style.color = 'red';
+        Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan. Coba lagi.' });
       }
     });
 
@@ -198,10 +220,8 @@
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       if (!token) return;
       const otp = document.getElementById('otp').value.trim();
-      const notif = document.getElementById('otpNotif');
-      notif.textContent = '';
       try {
-        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/auth/verify-email', {
+        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/user/verify-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -211,18 +231,15 @@
         });
         const data = await res.json();
         if (res.ok) {
-          notif.textContent = 'Email berhasil diverifikasi!';
-          notif.style.color = 'green';
+          Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Email berhasil diverifikasi!' });
           document.getElementById('otpForm').style.display = 'none';
           document.getElementById('profileForm').style.display = '';
           loadProfile();
         } else {
-          notif.textContent = data.error || 'OTP salah atau expired.';
-          notif.style.color = 'red';
+          Swal.fire({ icon: 'error', title: 'Gagal', text: data.error || 'OTP salah atau expired.' });
         }
       } catch {
-        notif.textContent = 'Terjadi kesalahan. Coba lagi.';
-        notif.style.color = 'red';
+        Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan. Coba lagi.' });
       }
     });
 
@@ -232,16 +249,13 @@
       const oldPassword = document.getElementById('oldPassword').value;
       const newPassword = document.getElementById('newPassword').value;
       const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-      const notif = document.getElementById('notif');
-      notif.textContent = '';
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
       if (!token) {
-        notif.textContent = 'Anda harus login.';
-        notif.style.color = 'red';
+        Swal.fire({ icon: 'error', title: 'Gagal', text: 'Anda harus login.' });
         return;
       }
       try {
-        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/auth/change-password', {
+        const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/user/password', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -255,16 +269,13 @@
         });
         const data = await res.json();
         if (res.ok) {
-          notif.textContent = data.message || 'Password berhasil diganti!';
-          notif.style.color = 'green';
+          Swal.fire({ icon: 'success', title: 'Berhasil', text: data.message || 'Password berhasil diganti!' });
           document.getElementById('changePasswordForm').reset();
         } else {
-          notif.textContent = data.error || 'Gagal mengganti password.';
-          notif.style.color = 'red';
+          Swal.fire({ icon: 'error', title: 'Gagal', text: data.error || 'Gagal mengganti password.' });
         }
       } catch (err) {
-        notif.textContent = 'Terjadi kesalahan. Coba lagi.';
-        notif.style.color = 'red';
+        Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan. Coba lagi.' });
       }
     });
   </script>
