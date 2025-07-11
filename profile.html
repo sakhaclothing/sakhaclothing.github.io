@@ -211,9 +211,6 @@
       const username = document.getElementById('username').value.trim();
       const fullname = document.getElementById('fullname').value.trim();
       const email = document.getElementById('email').value.trim();
-      // Cek apakah email berubah
-      if (!lastEmail) lastEmail = email;
-      const isEmailChanged = email !== lastEmail;
       try {
         const res = await fetch('https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha/auth/profile', {
           method: 'PUT',
@@ -225,12 +222,12 @@
         });
         const data = await res.json();
         if (res.ok) {
-          if (isEmailChanged) {
-            Swal.fire({ icon: 'info', title: 'Verifikasi Email', text: 'Kode OTP dikirim ke email baru. Silakan verifikasi.' });
+          if (data.message && data.message.includes('OTP')) {
+            Swal.fire({ icon: 'info', title: 'Verifikasi Email', text: data.message });
             document.getElementById('profileForm').style.display = 'none';
             document.getElementById('otpForm').style.display = '';
           } else {
-            Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Profil berhasil diperbarui!' });
+            Swal.fire({ icon: 'success', title: 'Berhasil', text: data.message || 'Profil berhasil diperbarui!' });
           }
           lastEmail = email;
         } else {
