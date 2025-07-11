@@ -1,5 +1,41 @@
 # Sakha Clothing - Official Website
 
+## 🚀 Quick Start & Fitur Profile
+
+### Fitur Profile
+
+- **Edit Profil:** User dapat mengubah username, fullname, dan email.
+- **Ganti Email:** Jika email diubah, sistem akan mengirim OTP ke email baru. User harus memasukkan OTP untuk verifikasi.
+- **Ganti Password:** User dapat mengganti password dengan memasukkan password lama dan password baru.
+- **Notifikasi Interaktif:** Semua aksi penting (update profil, ganti password, verifikasi email) menggunakan SweetAlert2 untuk feedback yang jelas.
+
+### Cara Menggunakan (User)
+
+1. **Login** ke website.
+2. Klik menu **My Profile** di pojok kanan atas.
+3. Di halaman profile:
+   - Edit data diri, klik "Simpan Perubahan".
+   - Jika email diubah, masukkan OTP yang dikirim ke email baru.
+   - Untuk ganti password, isi form di bawah dan klik "Simpan Password".
+4. Semua perubahan akan mendapat notifikasi sukses/gagal.
+
+### Cara Menjalankan Lokal
+
+1. Clone repo:
+   ```bash
+   git clone https://github.com/yourusername/sakhaclothing.github.io.git
+   cd sakhaclothing.github.io
+   ```
+2. Buka `index.html` di browser atau jalankan server lokal:
+   ```bash
+   python -m http.server 8000
+   # atau
+   npx http-server
+   ```
+3. Akses di `http://localhost:8000`
+
+---
+
 ![Sakha Clothing Logo](images/Minimalist%20Line%20Business%20Logo.png)
 
 ## 📖 About
@@ -57,7 +93,6 @@ Sakha Clothing is a premium clothing brand specializing in custom screen printin
 - **Google Fonts** - Web font delivery
 - **CDN Resources** - Bootstrap and Swiper.js from CDN
 - **WhatsApp API** - Direct messaging integration
-
 
 ## 🚀 Getting Started
 
