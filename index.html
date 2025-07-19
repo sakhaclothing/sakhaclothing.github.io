@@ -321,10 +321,11 @@
         <p class="newsletter__description">
           Get up to date with the latest trend and information from us.
         </p>
-        <form class="newsletter__form">
-          <input type="email" placeholder="Enter your email" class="newsletter__input">
-          <button type="submit" class="newsletter__button">Subscribe Our product →</button>
+        <form class="newsletter__form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email" class="newsletter__input" id="newsletterEmail" required>
+          <button type="submit" class="newsletter__button" id="newsletterButton">Subscribe Our product →</button>
         </form>
+        <div id="newsletterMessage" class="newsletter__message" style="display: none; margin-top: 10px; padding: 10px; border-radius: 5px;"></div>
       </div>
     </div>
   </section>

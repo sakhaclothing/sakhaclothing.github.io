@@ -146,6 +146,81 @@ const AuthService = {
         var dashboardNav = $('#dashboardNav');
         var registerNav = $('#registerNav');
 
+        // Newsletter functionality
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+        const newsletterButton = document.getElementById('newsletterButton');
+        const newsletterMessage = document.getElementById('newsletterMessage');
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const email = newsletterEmail.value.trim();
+                if (!email) {
+                    showNewsletterMessage('Please enter your email address', 'error');
+                    return;
+                }
+
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showNewsletterMessage('Please enter a valid email address', 'error');
+                    return;
+                }
+
+                // Disable button and show loading
+                newsletterButton.disabled = true;
+                newsletterButton.textContent = 'Subscribing...';
+
+                try {
+                    const response = await fetch(`${AuthService.API_BASE_URL}/newsletter/subscribe`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        showNewsletterMessage(data.message || 'Successfully subscribed to newsletter!', 'success');
+                        newsletterEmail.value = '';
+                    } else {
+                        showNewsletterMessage(data.message || 'Failed to subscribe. Please try again.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Newsletter subscription error:', error);
+                    showNewsletterMessage('Network error. Please try again later.', 'error');
+                } finally {
+                    // Re-enable button
+                    newsletterButton.disabled = false;
+                    newsletterButton.textContent = 'Subscribe Our product →';
+                }
+            });
+        }
+
+        function showNewsletterMessage(message, type) {
+            newsletterMessage.textContent = message;
+            newsletterMessage.style.display = 'block';
+
+            if (type === 'success') {
+                newsletterMessage.style.backgroundColor = '#d4edda';
+                newsletterMessage.style.color = '#155724';
+                newsletterMessage.style.border = '1px solid #c3e6cb';
+            } else {
+                newsletterMessage.style.backgroundColor = '#f8d7da';
+                newsletterMessage.style.color = '#721c24';
+                newsletterMessage.style.border = '1px solid #f5c6cb';
+            }
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                newsletterMessage.style.display = 'none';
+            }, 5000);
+        }
+
         // Cek status login user
         async function checkLoginStatus() {
             try {
