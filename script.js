@@ -1,3 +1,6 @@
+import { getJSON, postJSON } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.2.8/api.min.js";
+import { setCookieWithExpireHour, getCookie, deleteCookie } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.2.8/cookie.min.js";
+
 // Authentication Service
 const AuthService = {
     // Backend API URL - sesuaikan dengan URL backend Anda
@@ -5,17 +8,17 @@ const AuthService = {
 
     // Get token from localStorage
     getToken: function () {
-        return localStorage.getItem('token');
+        return getCookie('token');
     },
 
     // Set token to localStorage
     setToken: function (token) {
-        localStorage.setItem('token', token);
+        setCookieWithExpireHour('token', token, 24);
     },
 
     // Remove token from localStorage
     removeToken: function () {
-        localStorage.removeItem('token');
+        deleteCookie('token');
     },
 
     // Check if user is authenticated
@@ -28,24 +31,17 @@ const AuthService = {
     validateToken: async function () {
         try {
             const token = this.getToken();
-            if (!token) {
-                return false;
-            }
+            if (!token) return false;
 
-            const response = await fetch(`${this.API_BASE_URL}/auth/validate`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+            return new Promise((resolve) => {
+                getJSON(
+                    `${this.API_BASE_URL}/auth/validate`,
+                    (response) => {
+                        resolve(response.status === 200 && response.data.valid === true);
+                    },
+                    { 'Authorization': `Bearer ${token}` }
+                );
             });
-
-            if (response.ok) {
-                const data = await response.json();
-                return data.valid === true;
-            }
-
-            return false;
         } catch (error) {
             console.error('Error validating token:', error);
             return false;
