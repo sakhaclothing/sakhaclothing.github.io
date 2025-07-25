@@ -1,87 +1,44 @@
-import { getJSON, postJSON } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.2.8/api.min.js";
-import { setCookieWithExpireHour, getCookie, deleteCookie } from "https://cdn.jsdelivr.net/gh/jscroot/lib@0.2.8/cookie.min.js";
+// Cookie helper functions
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function setCookie(name, value, hours) {
+    const expires = new Date(Date.now() + hours * 60 * 60 * 1000).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
+
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
 
 // Authentication Service
 const AuthService = {
-    // Backend API URL - sesuaikan dengan URL backend Anda
     API_BASE_URL: 'https://asia-southeast2-ornate-course-437014-u9.cloudfunctions.net/sakha',
 
-    // Get token from localStorage
     getToken: function () {
         return getCookie('token');
     },
 
-    // Set token to localStorage
     setToken: function (token) {
-        setCookieWithExpireHour('token', token, 24);
+        setCookie('token', token, 24);
     },
 
-    // Remove token from localStorage
     removeToken: function () {
         deleteCookie('token');
     },
 
-    // Check if user is authenticated
     isAuthenticated: function () {
         const token = this.getToken();
         return token && token.length > 0;
     },
 
-    // Validate token with backend
-    validateToken: async function () {
-        try {
-            const token = this.getToken();
-            if (!token) return false;
-
-            return new Promise((resolve) => {
-                getJSON(
-                    `${this.API_BASE_URL}/auth/validate`,
-                    (response) => {
-                        resolve(response.status === 200 && response.data.valid === true);
-                    },
-                    { 'Authorization': `Bearer ${token}` }
-                );
-            });
-        } catch (error) {
-            console.error('Error validating token:', error);
-            return false;
-        }
-    },
-
-    // Get user profile from backend
-    getUserProfile: async function () {
-        try {
-            const token = this.getToken();
-            if (!token) {
-                return null;
-            }
-
-            const response = await fetch(`${this.API_BASE_URL}/auth/profile`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                const userData = await response.json();
-                return userData;
-            }
-
-            return null;
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
-            return null;
-        }
-    },
-
-    // Logout user
     logout: async function () {
         try {
             const token = this.getToken();
             if (token) {
-                // Call backend logout endpoint
                 await fetch(`${this.API_BASE_URL}/auth/logout`, {
                     method: 'POST',
                     headers: {
@@ -93,35 +50,8 @@ const AuthService = {
         } catch (error) {
             console.error('Error during logout:', error);
         } finally {
-            // Always remove token locally
             this.removeToken();
             localStorage.removeItem('userData');
-        }
-    },
-
-    // Handle login redirect (when user comes back from login page)
-    handleLoginRedirect: function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const userData = urlParams.get('userData');
-
-        if (token) {
-            this.setToken(token);
-
-            if (userData) {
-                try {
-                    const parsedUserData = JSON.parse(decodeURIComponent(userData));
-                    localStorage.setItem('userData', JSON.stringify(parsedUserData));
-                } catch (error) {
-                    console.error('Error parsing user data:', error);
-                }
-            }
-
-            // Clean URL
-            window.history.replaceState({}, document.title, window.location.pathname);
-
-            // Trigger profile update
-            this.checkAndUpdateProfile();
         }
     }
 };
