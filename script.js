@@ -61,7 +61,7 @@ const AuthService = {
             }
 
             const response = await fetch(`${this.API_BASE_URL}/auth/profile`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ const AuthService = {
             // Always remove token locally
             this.removeToken();
             localStorage.removeItem('userData');
-            
+
             // Clear user session cookie
             document.cookie = 'user_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         }
