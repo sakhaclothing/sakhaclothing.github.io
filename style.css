@@ -167,12 +167,6 @@ a:hover {
   color: #333;
 }
 
-.text-section p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
 
 .text-section button {
   padding: 10px 20px;
@@ -267,8 +261,10 @@ a:hover {
   justify-content: center;
 }
 .section__title {
-  font-size: 2.5em;
-  margin: 0 0 20px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 0.5rem;
 }
 .newsletter__form {
   display: flex;
