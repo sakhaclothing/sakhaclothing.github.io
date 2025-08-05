@@ -476,7 +476,7 @@ a:hover {
 .profile-name {
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: #f7f2f2;
   white-space: nowrap;
 }
 
@@ -487,7 +487,7 @@ a:hover {
 .profile-dropdown-btn {
   background: none;
   border: none;
-  color: #666;
+  color: #fbf8f8;
   cursor: pointer;
   padding: 2px;
   transition: color 0.3s ease;
@@ -522,7 +522,7 @@ a:hover {
 .dropdown-item {
   display: block;
   padding: 10px 15px;
-  color: #333;
+  color: #fdfbfb;
   text-decoration: none;
   font-size: 14px;
   transition: background-color 0.3s ease;
