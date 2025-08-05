@@ -536,24 +536,24 @@ a:hover {
 
 /* Dark theme for navbar */
 .navbar.bg-black {
-  background-color: rgba(0, 0, 0, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 20px rgba(219, 219, 219, 0.3);
 }
 
 .navbar.bg-black .navbar-brand {
-  color: #fff !important;
+  color: #000000 !important;
 }
 
 .navbar.bg-black .navbar-nav .nav-link {
-  color: #fff !important;
+  color: #000000 !important;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .navbar.bg-black .navbar-nav .nav-link:hover {
-  color: #f0f0f0 !important;
+  color: #000000 !important;
 }
 
 .navbar.bg-black .navbar-toggler {
@@ -570,7 +570,7 @@ a:hover {
 }
 
 .navbar.bg-black .profile-name {
-  color: #fff;
+  color: #000000;
 }
 
 .navbar.bg-black .profile-dropdown-btn {
